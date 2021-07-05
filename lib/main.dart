@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:todo_list/telas/home_tela.dart';
+import "package:flutter/material.dart";
+import "package:intl/intl.dart";
+import "package:todo_list/telas/home_tela.dart";
 
 void main() {
   runApp(MyApp());
@@ -10,7 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: "Flutter Demo",
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
