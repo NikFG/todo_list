@@ -45,10 +45,8 @@ mixin _$Tarefa on _TarefaInfoBase, Store {
 
   @override
   String toString() {
-    return "Tarefa: { "
-        "descricao: $descricao "
-        "concluido: $concluido "
-        "dataHora: ${DateFormat().format(dataHora)} "
-        "}";
+    return '''
+concluido: ${concluido}
+    ''';
   }
 }

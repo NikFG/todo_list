@@ -21,34 +21,55 @@ mixin _$TarefaStore on _TarefaStore, Store {
   int get tam => (_$tamComputed ??=
           Computed<int>(() => super.tam, name: '_TarefaStore.tam'))
       .value;
-
-  final _$listaTarefasAtom = Atom(name: '_TarefaStore.listaTarefas');
+  Computed<List<Tarefa>>? _$conluidasComputed;
 
   @override
-  ObservableList<Tarefa> get listaTarefas {
-    _$listaTarefasAtom.reportRead();
-    return super.listaTarefas;
+  List<Tarefa> get conluidas =>
+      (_$conluidasComputed ??= Computed<List<Tarefa>>(() => super.conluidas,
+              name: '_TarefaStore.conluidas'))
+          .value;
+  Computed<List<Tarefa>>? _$naoConcluidasComputed;
+
+  @override
+  List<Tarefa> get naoConcluidas => (_$naoConcluidasComputed ??=
+          Computed<List<Tarefa>>(() => super.naoConcluidas,
+              name: '_TarefaStore.naoConcluidas'))
+      .value;
+  Computed<List<Tarefa>>? _$filtragemComputed;
+
+  @override
+  List<Tarefa> get filtragem =>
+      (_$filtragemComputed ??= Computed<List<Tarefa>>(() => super.filtragem,
+              name: '_TarefaStore.filtragem'))
+          .value;
+
+  final _$tarefasAtom = Atom(name: '_TarefaStore.tarefas');
+
+  @override
+  ObservableList<Tarefa> get tarefas {
+    _$tarefasAtom.reportRead();
+    return super.tarefas;
   }
 
   @override
-  set listaTarefas(ObservableList<Tarefa> value) {
-    _$listaTarefasAtom.reportWrite(value, super.listaTarefas, () {
-      super.listaTarefas = value;
+  set tarefas(ObservableList<Tarefa> value) {
+    _$tarefasAtom.reportWrite(value, super.tarefas, () {
+      super.tarefas = value;
     });
   }
 
-  final _$checkAtom = Atom(name: '_TarefaStore.check');
+  final _$filtroAtom = Atom(name: '_TarefaStore.filtro');
 
   @override
-  bool get check {
-    _$checkAtom.reportRead();
-    return super.check;
+  String get filtro {
+    _$filtroAtom.reportRead();
+    return super.filtro;
   }
 
   @override
-  set check(bool value) {
-    _$checkAtom.reportWrite(value, super.check, () {
-      super.check = value;
+  set filtro(String value) {
+    _$filtroAtom.reportWrite(value, super.filtro, () {
+      super.filtro = value;
     });
   }
 
@@ -88,12 +109,26 @@ mixin _$TarefaStore on _TarefaStore, Store {
   }
 
   @override
+  void _ordenaLista() {
+    final _$actionInfo = _$_TarefaStoreActionController.startAction(
+        name: '_TarefaStore._ordenaLista');
+    try {
+      return super._ordenaLista();
+    } finally {
+      _$_TarefaStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
-listaTarefas: ${listaTarefas},
-check: ${check},
+tarefas: ${tarefas},
+filtro: ${filtro},
 isEmpty: ${isEmpty},
-tam: ${tam}
+tam: ${tam},
+conluidas: ${conluidas},
+naoConcluidas: ${naoConcluidas},
+filtragem: ${filtragem}
     ''';
   }
 }
