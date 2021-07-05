@@ -3,6 +3,7 @@ import "package:flutter_mobx/flutter_mobx.dart";
 import "package:todo_list/modelos/tarefa.dart";
 import "package:todo_list/stores/tarefa_store.dart";
 import "package:todo_list/widgets/card_custom.dart";
+import 'package:todo_list/widgets/fab_custom.dart';
 
 class HomeTela extends StatefulWidget {
   const HomeTela();
@@ -25,6 +26,7 @@ class _HomeTelaState extends State<HomeTela> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: Fabcustom(),
       appBar: AppBar(
         title: Text("Todo-List"),
         centerTitle: true,
@@ -42,6 +44,7 @@ class _HomeTelaState extends State<HomeTela> {
                     child: TextFormField(
                       controller: _descricaoController,
                       decoration: InputDecoration(hintText: "Tarefa a fazer"),
+
                       validator: (value) {
                         if (value!.isEmpty) {
                           return "Está vazio";
@@ -72,20 +75,21 @@ class _HomeTelaState extends State<HomeTela> {
               return Text("Não há tarefas");
             } else {
               return Expanded(
-                  child: ListView.builder(
-                      itemCount: store.tam,
-                      itemBuilder: (context, index) {
-                        final Tarefa tarefa = store.listaTarefas[index];
-                        return CardCustom(
-                          tarefa: tarefa,
-                          apaga: () {
-                            store.removeList(tarefa);
-                          },
-                          conclui: () {
-                            store.concluiList(tarefa);
-                          },
-                        );
-                      }));
+                child: ListView.builder(
+                    itemCount: store.tam,
+                    itemBuilder: (context, index) {
+                      final Tarefa tarefa = store.tarefas[index];
+                      return CardCustom(
+                        tarefa: tarefa,
+                        apaga: () {
+                          store.removeList(tarefa);
+                        },
+                        conclui: () {
+                          store.concluiList(tarefa);
+                        },
+                      );
+                    }),
+              );
             }
           }),
         ],
